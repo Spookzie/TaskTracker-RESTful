@@ -1,0 +1,15 @@
+services:
+  # PostgreSQL database
+  db:
+    # The Docker image of postgres
+    image: postgres:latest
+    # The ports to expose to the host container
+    # 5432 is the default PostgreSQL port
+    ports:
+      - "5432:5432"
+    # If we accidentally kill the running container, Docker Compose will restart it
+    restart: always
+    # The PostgreSQL Docker container uses environment variables to read configuration
+    # Setting the password
+    environment:
+      POSTGRES_PASSWORD: secrets.DB_PASSWORD
