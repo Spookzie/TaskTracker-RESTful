@@ -49,7 +49,3 @@ The frontend uses a pre-made MVP template to simulate interaction. Backend logic
 - Java 21 or higher (Java 24 recommended)
 - Maven
 - PostgreSQL (ensure the DB and credentials match `application.properties`)
-
-### Run the Project:
-```bash
-mvn spring-boot:run
