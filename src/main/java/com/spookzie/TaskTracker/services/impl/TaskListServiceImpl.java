@@ -3,6 +3,7 @@ package com.spookzie.TaskTracker.services.impl;
 import com.spookzie.TaskTracker.domain.entities.TaskList;
 import com.spookzie.TaskTracker.repositories.TaskListRepository;
 import com.spookzie.TaskTracker.services.TaskListService;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -60,6 +61,12 @@ public class TaskListServiceImpl implements TaskListService
     }
 
 
+    /*
+    * Transactional is useful in calls like these to maintain consistency during operations on DB
+    * Here we use findById() and few steps later use save() so to ensure that the DB stays consistent b/w these 2 calls it is optimal to use @Transactional
+    * While save() uses transactional itself using it again doubles the security in case of exceptions
+    **************************/
+    @Transactional
     @Override
     public TaskList updateTaskList(UUID id, TaskList task_list)
     {

@@ -13,8 +13,11 @@ import java.util.UUID;
 public interface TaskRepository extends JpaRepository<Task, UUID>
 {
     /*  Get all the tasks in a list */
-    List<Task> findByTaskListId(UUID taskListId);
+    List<Task> findByTaskListId(UUID task_list_id);
 
     /*  Get a specific task in a task list  */
-    Optional<Task> findByTaskListIdAndId(UUID taskListId, UUID id);
+    Optional<Task> findByTaskListIdAndId(UUID task_list_id, UUID id);
+
+    /*  Delete a specific task in a task list   */
+    void deleteByTaskListIdAndId(UUID task_list_id, UUID id);
 }

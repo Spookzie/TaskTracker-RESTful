@@ -6,6 +6,7 @@ import com.spookzie.TaskTracker.services.TaskService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 
@@ -42,5 +43,33 @@ public class TaskController
                         this.taskMapper.fromDto(task_dto)
                 )
         );
+    }
+
+
+    @GetMapping(path = "/{task_id}")
+    public Optional<TaskDto> getTaskById(@PathVariable("task_list_id")UUID task_list_id, @PathVariable("task_id")UUID task_id)
+    {
+        return this.taskService.getTaskById(task_list_id, task_id)
+                .map(this.taskMapper::toDto);
+    }
+
+
+    @PutMapping(path = "/{task_id}")
+    public TaskDto updateTask(@PathVariable("task_list_id")UUID task_list_id, @PathVariable("task_id")UUID task_id,
+                              @RequestBody TaskDto task_dto)
+    {
+        return this.taskMapper.toDto(
+                this.taskService.updateTask(
+                        task_list_id, task_id,
+                        this.taskMapper.fromDto(task_dto)
+                )
+        );
+    }
+
+
+    @DeleteMapping(path = "/{task_id}")
+    public void deleteTask(@PathVariable("task_list_id")UUID task_list_id, @PathVariable("task_id") UUID task_id)
+    {
+        this.taskService.deleteTask(task_list_id, task_id);
     }
 }
